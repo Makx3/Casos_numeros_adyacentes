@@ -1,15 +1,36 @@
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-        int[] arreglo = {1, -4, 2, 2, 5, -1};
-        int maxProducto = productoAdyacentes(arreglo);
-        System.out.println("El producto adyacente es: " + maxProducto);
+        Scanner scanner = new Scanner(System.in);
+
+        int[] arreglo = validarArregloDesdeConsola(scanner);
+
+        int maxProducto = productoAdyacente(arreglo);
+        System.out.println("El mayor producto de números adyacentes es: " + maxProducto);
     }
 
-    public static int productoAdyacentes(int[] arr) {
-        if (arr.length < 2) {
+    public static int[] validarArregloDesdeConsola(Scanner scanner) {
+        System.out.print("Ingrese la cantidad de elementos en el arreglo: ");
+        int n = scanner.nextInt();
+
+        if (n < 2) {
             throw new IllegalArgumentException("El arreglo debe tener al menos dos elementos");
         }
 
+        int[] arreglo = new int[n];
+
+        System.out.println("Ingrese los elementos del arreglo uno por uno:");
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Elemento " + (i + 1) + ": ");
+            arreglo[i] = scanner.nextInt();
+        }
+
+        return arreglo;
+    }
+
+    public static int productoAdyacente(int[] arr) {
         int maxProducto = arr[0] * arr[1];
 
         for (int i = 1; i < arr.length - 1; i++) {
